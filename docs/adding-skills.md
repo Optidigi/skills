@@ -25,6 +25,4 @@
 
 ## Current naming decision
 
-`skills/saas-planning-baseline/` preserves the existing `SKILL.md` name and `$saas-planning-baseline` trigger from `deslopified-kit/deslopified-skill/`. To rebrand (e.g. `deslopified-baseline`):
-- rename folder + `name:` field together,
-- update `agents/openai.yaml` `default_prompt` and any `$...` references in docs.
+`skills/build-ready-baseline/` (frontmatter `name: build-ready-baseline`, trigger `$build-ready-baseline`). Migrated from `deslopified-kit/deslopified-skill/` (formerly `saas-planning-baseline`). Folder + `name:` must stay in sync; `agents/openai.yaml` `default_prompt` follows the same trigger.

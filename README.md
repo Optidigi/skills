@@ -6,9 +6,9 @@ Central home for reusable agent skills. Each skill is a self-contained folder un
 
 | Skill | Path | Purpose |
 |---|---|---|
-| `saas-planning-baseline` | `skills/saas-planning-baseline/` | Create/revise a SaaS product-planning baseline + engineering handoff. Discovery, initial architecture, feasibility, planning refresh — not ordinary coding. |
+| `build-ready-baseline` | `skills/build-ready-baseline/` | Create/revise a SaaS product-planning baseline + engineering handoff. Discovery, initial architecture, feasibility, planning refresh — not ordinary coding. |
 
-> Naming note (open): local source folder is `deslopified-skill/` but `SKILL.md` frontmatter is `name: saas-planning-baseline`. V1 uses `skills/saas-planning-baseline/` so folder matches frontmatter `name` and existing `$saas-planning-baseline` trigger. Renaming to a branded name (e.g. `deslopified-baseline`) is a one-folder + one-field change if you want it — see `docs/adding-skills.md`.
+> Naming: `skills/build-ready-baseline/` matches `SKILL.md` frontmatter `name` and the `$build-ready-baseline` trigger. Source was `deslopified-kit/deslopified-skill/` (`saas-planning-baseline`).
 
 ## Shape
 

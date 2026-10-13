@@ -1,4 +1,0 @@
-interface:
-  display_name: "SaaS Planning Baseline"
-  short_description: "Define a SaaS product and its engineering handoff"
-  default_prompt: "Use $saas-planning-baseline to define this product and prepare a practical handoff for a local engineering agent."

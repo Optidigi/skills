@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build-Ready Baseline"
+  short_description: "Define a SaaS product and its engineering handoff"
+  default_prompt: "Use $build-ready-baseline to define this product and prepare a practical handoff for a local engineering agent."

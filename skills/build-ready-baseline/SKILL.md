@@ -1,5 +1,5 @@
 ---
-name: saas-planning-baseline
+name: build-ready-baseline
 description: >-
   Create or explicitly revise a SaaS product-planning baseline and engineering
   handoff from requirements, decisions and evidence. Use for product discovery,
@@ -8,7 +8,7 @@ description: >-
   skill, unrelated business plans, or executing the plan.
 ---
 
-# SaaS planning baseline
+# Build-ready baseline
 
 Produce a concise baseline that a repository-attached engineering owner can inspect, qualify and execute. Support product discovery and planning in a web agent or local agent. Preserve the user's intended offering and existing decisions; distinguish confirmed requirements, proposed choices and untested assumptions.
 
