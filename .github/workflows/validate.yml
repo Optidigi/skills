@@ -1,0 +1,44 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate skill packages
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+          root = pathlib.Path("skills")
+          assert root.is_dir(), "skills/ missing"
+          ok = True
+          for skill_dir in sorted(p for p in root.iterdir() if p.is_dir()):
+              sk = skill_dir / "SKILL.md"
+              print(f"== {skill_dir.name} ==")
+              if not sk.exists():
+                  print(f"  FAIL: {sk} missing"); ok = False; continue
+              text = sk.read_text()
+              m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+              if not m:
+                  print("  FAIL: missing frontmatter"); ok = False; continue
+              fm = m.group(1)
+              name = re.search(r"^name:\s*(\S+)", fm, re.M)
+              desc = re.search(r"^description:", fm, re.M)
+              if not name or not desc:
+                  print("  FAIL: frontmatter needs name + description"); ok = False
+              elif name.group(1) != skill_dir.name:
+                  print(f"  FAIL: folder '{skill_dir.name}' != frontmatter name '{name.group(1)}'"); ok = False
+              else:
+                  print(f"  OK: name={name.group(1)}")
+              for link in re.findall(r"\((assets/[^)]+)\)", text):
+                  if not (skill_dir / link).exists():
+                      print(f"  FAIL: linked file missing: {link}"); ok = False
+          sys.exit(0 if ok else 1)
+          PY
