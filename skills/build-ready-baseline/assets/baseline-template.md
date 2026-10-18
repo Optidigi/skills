@@ -1,77 +1,104 @@
-# [Product] — engineering baseline
+# [Product] — Build Brief / Specification
 
-Date/revision: [value] · Product owner: [person] · Evidence/access: [what was inspected, refs/dates and material limits]
+**Revision/date:** [value]  
+**Owner:** [person/role or PENDING]  
+**Evidence inspected:** [documents, source refs, relevant source dates; access limits]  
+**Baseline status:** [READY FOR LOCAL PREFLIGHT / PRODUCT DECISION PENDING]  
+**Next authorized phase:** Phase 1 — Preflight & Preparation **only**, subject to actual setup permissions.
 
-Use this as a coverage guide, not a mandatory form. Combine sections and omit inapplicable rows. Replace placeholders with known facts or explicitly pending inputs; do not turn proposed choices or permissions into approvals.
+> This is the initial agent's product and preparation contract, **not** a report that the local environment has been verified. Replace placeholders. Use this as a coverage guide; keep detail proportional, but preserve the handoff and post-preflight approval gate. No proposal or requested permission is an approved grant.
 
-## Purpose and scope
+## 0. Handoff snapshot
 
-- Users and problem:
-- Required outcome and supported platform/customer conditions:
-- Included features and exclusions:
-- UI/design references:
+- **Intended outcome:** [one-paragraph product and user value]
+- **First connected user journey:** [entry → meaningful action → real processing/durable state → result accessible to intended user]
+- **Most important unknowns / decisions:** [risks, decision owners, what they block]
+- **Next action:** [local owner starts preflight, prepares report, STOPS for approval]
 
-## Journeys and acceptance
+## 1. Product contract and boundaries
 
-| Journey/feature | Important properties/rules | Success and failure examples | Acceptance evidence / status |
+- **Users/jobs and problem:** [who, why, critical jobs]
+- **Goals/outcomes:** [observable success and relevant metrics]
+- **Supported platforms/customer conditions:** [browser/device/regions/roles when material]
+- **Scope/non-goals:** [included features and explicit exclusions]
+- **UX/UI direction:** [flows, existing references, accessibility and interaction expectations]
+- **Domain rules:** [data entities, lifecycle, money/ownership/privacy/business constraints]
+
+## 2. Journeys, requirements and acceptance
+
+Use stable IDs on material requirements and their acceptance conditions. Keep requirements traceable to delivery outcomes, not just descriptive prose. Include success, failure/recovery and relevant edge behavior.
+
+| Requirement | Journey / observable obligation | Acceptance evidence (`AC-...`) | Increment (`M-...`) | Source/status |
+|---|---|---|---|---|
+| REQ-001 | [actor, trigger, system response and business/data rule] | AC-001: [given/when/then; pass/fail, error/recovery condition] | M-01 | [user requirement / existing contract / PENDING] |
+
+**Important quality and operating constraints:** [performance, security, privacy, resilience, accessibility, auditability and lifecycle targets where relevant; measurable threshold or pending decision]
+
+## 3. Architecture intent and interfaces
+
+- **Current system / constraints:** [observed code/ref or new-project assumption; do not claim unseen source]
+- **Proposed architecture/stack:** [components and rationale; label PROPOSED unless decided]
+- **Boundaries/data flow:** [critical actors, services, persistence, jobs and external interfaces]
+- **Integration contracts:** [auth, billing, storage, APIs, platforms and limits that matter]
+- **Design trade-offs:** [what was chosen/agreed vs what the local owner must validate]
+- **Diagrams/annexes:** [links only when useful; primary brief remains usable alone]
+
+## 4. Evidence, decisions and unresolved assumptions
+
+| ID/item | Kind: REQUIREMENT / AGREED DECISION / PROPOSAL / HYPOTHESIS | Rationale, source and date | Decision owner / validation needed |
 |---|---|---|---|
-| [required outcome] | [state/data/business rule] | [observable behavior] | [test/demo/provider observation; observed or pending] |
+| DEC-001 | PROPOSAL | [why and current support] | [owner to adopt; local validation] |
 
-## Decisions and assumptions
-
-| Item | Requirement / agreed decision / proposal / hypothesis | Reason or source | Change authority or proof needed |
+| Risk/claim | Evidence and applicable version/context | Cheapest meaningful proof, pass/fail | Phase and affected work |
 |---|---|---|---|
-| [item] | [status] | [reason/source and applicable context] | [authorized decision owner or probe] |
+| [load-bearing unknown] | [opened primary source / observed behavior / unavailable] | [allowed environment, required access, effect if false] | [non-product setup probe during Phase 1 OR product feasibility test in Phase 2] |
 
-Include initial stack, responsibilities, critical interfaces and relevant safety/lifecycle constraints. Distinguish documented external capability from observed project behavior; date unstable claims and link inspected sources. Preserve existing contracts when continuing a project. Leave ordinary implementation details to the local engineering owner.
+A documentation claim is not proof of working project integration. Any code/scaffold necessary for a product proof belongs to Phase 2 after approval. Mark unavailable evidence honestly.
 
-## Feasibility and first working path
+## 5. Outcome-based implementation roadmap (NOT YET AUTHORIZED)
 
-| Risk/unknown | Cheapest proof and allowed environment | Access/dependency | Pass/fail criterion and consequence |
+| Increment | Working outcome + requirements | Dependencies/critical proofs | Acceptance/qualification |
 |---|---|---|---|
-| [assumption] | [bounded probe, including minimum scaffold] | [capability; available or pending] | [decision/acceptance affected] |
+| M-01 — Connected journey | [end-to-end user value; REQ/AC IDs] | [preflight capability, access, hypotheses] | [tests, runtime observation, provider checks, limits] |
+| M-02 — Expansion | [next needed features; REQ/AC IDs] | [preceding outcomes] | [tests and integrated evidence] |
+| M-Release | [supported product scope] | [security/commercial/native/release requirements] | [release criteria and actual rollout authority] |
 
-A pending proof permits the minimum authorized work needed to obtain it; it does not justify substantial dependent commitments or a claim of readiness.
+Implementation is **not** authorized by the existence of this roadmap. The local owner may execute it only after reviewing and completing preflight and receiving explicit user approval to proceed.
 
-**First connected journey:** [entry → meaningful action → real external/persistent processing → result available to the intended user].
+## 6. Local environment capability contract
 
-**Proof:** [environment, build/ref, reproducible steps, observed terminal result, and any substituted or still-unqualified boundary].
+Specify **what must work**, not an obligatory tool bundle. Candidate tools/skills/MCPs may be suggested with a rationale, but the local agent chooses and verifies the actual setup. Mark capabilities `REQUIRED NOW` vs `LATER` so preflight does not become unlimited.
 
-Keep this first path narrow without deleting required later features. Apply relevant safety when access, data or external effects first exist, including in experiments.
+| Capability | Why / needed by | Objective preflight verification | Candidate approaches (non-binding) | Access/limits |
+|---|---|---|---|---|
+| CAP-01 — Repository & host instructions | [M-01] | [read current source/ref/rules; verify permitted change mechanism] | [existing host-native tools] | [known/pending] |
+| CAP-02 — Runtime/build/test | [M-01] | [existing commands run with recorded outcome/version] | [repo package manager/native runner] | [known/pending] |
+| CAP-03 — UI/runtime inspection | [if applicable] | [inspect a safe running target or clearly mark not runnable yet] | [host browser, Playwright, browser MCP] | [known/pending] |
+| CAP-04 — Provider sandbox | [if applicable] | [authorized harmless connection smoke test, or specific unverified blocker] | [CLI/SDK/API/MCP chosen locally] | [known/pending] |
 
-| Increment | Working outcome | Dependencies | Local / native / release evidence and remaining obligations |
-|---|---|---|---|
-| First path | [minimum real journey] | [proofs/access needed] | [observed facts or exact pending checks] |
-| Expansion | [ordered feature groups] | [dependencies] | [affected tests and integrated behavior] |
-| Release | [complete supported offering] | [applicable native/security/commercial requirements] | [qualification and actual rollout authority] |
+**Local tooling ownership:** [the local implementation agent researches current options, reuses existing setup, selects tools/skills/MCPs/permissions within grants, configures them, and verifies effective versions/operations. No first-agent suggestion binds that selection.]
 
-## Execution agreement
+## 7. Authority and mandatory Phase 1 stop
 
-- Authorized outcome and completion boundary:
-- Local engineering owner; implementation, testing, review and normal integration actually authorized:
-- Development environments/resources and operations actually permitted, including deployment and native qualification where granted:
-- Spending, external-effect, destructive-operation and production limits:
-- Decisions/acceptance requiring the product owner or designated reviewer; existing milestone restrictions:
-- Missing inputs, who supplies them, and the specific work each blocks:
-- Next-path capabilities: repo/scripts/CI, relevant browser control, provider access, private credential entry and isolated test resources:
-- Selective skills/tools; actual inspection and host/version qualification needed:
-- Supporting research/review scope, actual isolation and engineering-owner integration responsibility:
-- Meaningful tests, runtime checks, proportionate review, final-candidate CI and post-integration verification:
-- Current repo documentation/state, affected updates and resume steps:
-- Progress/blocker reporting and any actual notification/runtime mechanism needed:
+**Phase 1 — Preflight & Preparation only**
 
-State existing grants as facts with their source and scope. Mark proposed permissions as pending owner decisions; do not put them into the startup prompt as granted. Continue ordinary work within the authorized outcome rather than stopping after each PR.
+- **Allowed within existing grants:** [repo/context inspection, tooling research, minimal host/config changes, non-product tests, existing build/test, safe sandbox/tooling probes]
+- **Not allowed before post-report approval:** [implementing features, substantial application scaffolding, migrations, product milestones, development deployment of application changes, production/external effects outside existing authorization]
+- **Confirmed resources/permissions with source:** [scope, environment, worktree/branch, ops; or PENDING]
+- **Pending access or decisions:** [who supplies, private credential entry route, which test/work is blocked]
+- **Spending/security/production restrictions:** [limits; if not granted, say pending—not implied]
+- **Required Phase 1 output:** `PREFLIGHT_REPORT.md` [or repo convention] + chat summary (full report in chat if file write is not permitted), with setup changes, rationale, capability-by-capability `PASS/FAIL/NOT TESTED/NOT APPLICABLE` evidence, missing user steps, risks, readiness and proposed M-01.
+- **Readiness labels:** `READY — AWAITING APPROVAL` if critical preparation is qualified; `BLOCKED — USER ACTION REQUIRED` if missing required inputs/permissions/checks prevent readiness. List unverified nonblocking items explicitly.
+- **Mandatory gate:** after the report, **STOP and request explicit user approval to start Phase 2**. Stop when ready *or* blocked. Fixing a blocker or granting an individual setup permission is not implementation approval; update/revalidate the report and stop again.
+- **Phase 2 (only after approval):** [scope/outcome that may then be autonomously implemented, test/review/integration/verification expectations, any further consequential decisions reserved for owner].
 
-## Handoff
+## 8. Local handoff
 
-**Readiness:** [ready for local qualification / product decision pending / affected path awaiting proof or access]. This is not approval, native acceptance or launch readiness.
+- **Brief readiness:** [READY FOR LOCAL PREFLIGHT / PRODUCT DECISION PENDING; never claim environment verified]
+- **Open product decisions:** [owner, options/recommendation, impact]
+- **Missing local inputs:** [provider, access, exact work blocked]
+- **Standalone startup prompt:** [`LOCAL_AGENT_STARTUP_PROMPT.md` or attached prompt]
 
-**Pending inputs:** [specific question/access, provider, blocked work and independent safe work].
+### Copyable local startup prompt
 
-### Local startup prompt
-
-> Read this baseline and the current repository instructions/state. Check current code, refs and existing contracts; reuse agreed decisions rather than restarting planning. Own delivery of [authorized outcome] within [confirmed authority, environments and limits], choosing ordinary implementation tactics yourself.
-Begin with a bounded local preflight for [first real journey]. Inspect and reuse existing setup before creating replacements. Within your authority, create or update the minimal host-appropriate repository instructions and install/configure the relevant tools, skills and provider connections. Verify that the actual host loads the intended instructions and skills and that the operations needed next work; report anything you cannot verify. Prefer working authorized alternatives over adding unnecessary tooling or MCPs. Skills provide methods, not permissions or new approval requirements.
-Build the minimum scaffold needed for necessary proofs and record actual results. Promptly report genuinely missing access, authentication or human-only actions with the specific steps I need to take, the work blocked and how you will verify the result afterward. Group related needs already known and continue useful independent safe work. Preflight is sufficient when the next proof is runnable—not when every possible future tool is configured.
-Prove [first real journey] through the result available to its intended user before substantial dependent expansion. Own necessary component corrections, permitted development deployment and runtime qualification. Use meaningful tests, proportionate independent review and applicable final-candidate CI. Integrate, verify the integrated build in the allocated environment, update affected documentation/state and continue toward the authorized outcome.
-Report meaningful progress without stopping merely because preflight, a PR or an internal work item finished. Return at [agreed outcome acceptance boundary], when a genuine blocker requires my assistance, or for a consequential decision/effect outside existing authority. Preserve explicit owner-imposed scope and resource limits; do not invent routine approval gates. Distinguish local completion, native qualification and release readiness, identify substituted or unqualified boundaries, and claim only what was observed.
+[Insert the **verbatim**, project-filled contents of `LOCAL_AGENT_STARTUP_PROMPT.md` generated from `assets/local-startup-prompt-template.md`. This keeps one-file handoff possible while also providing the prompt separately. Do not replace the prompt with a one-line pointer in the only delivered copy of the brief.]

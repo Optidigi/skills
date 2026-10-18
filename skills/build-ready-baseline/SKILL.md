@@ -1,81 +1,82 @@
 ---
 name: build-ready-baseline
 description: >-
-  Create or explicitly revise a SaaS product-planning baseline and engineering
-  handoff from requirements, decisions and evidence. Use for product discovery,
-  initial architecture, feasibility planning, or a requested planning refresh.
-  Do not use for ordinary coding, CI repair, routine delivery, reviewing this
-  skill, unrelated business plans, or executing the plan.
+  Create or explicitly revise a SaaS build brief/specification and a separate
+  preflight-only startup prompt for a local implementation agent. Use for product
+  discovery, initial architecture, feasibility planning, or a requested planning
+  refresh. Do not use for ordinary coding, CI repair, routine delivery, reviewing
+  this skill, unrelated business plans, or executing the plan.
 ---
 
 # Build-ready baseline
 
-Produce a concise baseline that a repository-attached engineering owner can inspect, qualify and execute. Support product discovery and planning in a web agent or local agent. Preserve the user's intended offering and existing decisions; distinguish confirmed requirements, proposed choices and untested assumptions.
+Create **two first-session deliverables**: (1) an evidence-based, implementation-ready **Build Brief / Specification** (`BUILD_BASELINE.md`), and (2) a **Local Implementation Agent Startup Prompt** (`LOCAL_AGENT_STARTUP_PROMPT.md`). The brief defines the product and the capabilities an engineer must establish; the prompt starts the local agent in **preflight and environment preparation only**. The local agent must report readiness and **stop for explicit user approval after preflight, even if everything passes**. Implementation is a separate, later phase.
 
-## Establish the starting point
+This skill plans and hands off; it does not configure the local agent, grant permissions, execute product work, or authorize deployment. Preserve existing project contracts and user decisions. Distinguish agreed facts and choices from proposals and untested assumptions.
 
-Read supplied requirements, examples and existing authoritative docs. In an existing project, use current source/refs when accessible and identify superseded instructions; avoid silently replacing contracts or recommending a rewrite. State which evidence and tools are accessible. A shared link, remembered connection or installed MCP does not establish access to its contents or operations.
+## 1. Establish the starting point
 
-Ask only questions whose answers materially change purpose, scope, feasibility or authority. Group them into a small set. Continue independent preparation while answers are pending. Label other unknowns and offer recommendations instead of inventing owner decisions. Reuse existing authorization; preparation is not a reason to request it again.
+Read supplied requirements, examples, designs and authoritative project documents. For existing projects inspect current source/refs when accessible, identify conflicting or superseded guidance, and avoid silently replacing contracts or prescribing a rewrite. Record what was actually read and the access limits: a shared URL or named connector does not prove its contents or operations were inspected.
 
-## Define the product before prescribing the implementation
+Ask only a small set of questions whose answers materially change the offering, scope, feasibility, authority or acceptance. Continue independent planning while answers are pending; mark unresolved choices with their owner rather than inventing consent. Do not infer that a request to prepare a brief also authorizes tool installation, credentials, paid resources or implementation.
 
-Capture users and their jobs, supported conditions, required journeys, features and domain properties, business rules, exclusions, UI/reference expectations and observable acceptance. Include representative success and failure examples. State relevant money, ownership, privacy, lifecycle and reliability constraints; apply them to this product rather than importing a generic checklist.
+## 2. Specify an observable product contract
 
-Separate:
+Define users/jobs, supported conditions, goals and exclusions, critical journeys, features, business/data rules, UI and accessibility expectations, and relevant privacy, security, reliability, lifecycle or commercial obligations. Include representative successes, failures, recovery and edge cases. Write requirements so a local engineer can determine what would count as passing acceptance without relying on the first conversation.
 
-- **Requirements:** user/provider obligations that the implementation must satisfy.
-- **Decisions:** agreed choices, their reasons and who may change them.
-- **Proposals:** recommended choices not yet adopted; identify a decision owner where approval is actually required.
-- **Hypotheses:** assumptions still requiring observation, with the effect of failure.
+For material requirements use stable `REQ-...` identifiers and observable `AC-...` acceptance conditions; map them to journeys and delivery increments (`M-...`). Keep traceability lightweight for small projects, but do not lose features or make unverifiable promises. Explicitly distinguish:
 
-For external claims, distinguish documented capability from observed project behavior; record the source and applicable conditions.
+- **Requirement** — an obligation to satisfy, with its authoritative source.
+- **Agreed decision** — an adopted choice, with rationale and change authority.
+- **Proposal** — a recommended choice not yet adopted; mark whose decision is needed.
+- **Hypothesis** — an unverified claim, its possible impact and necessary proof.
 
-Propose the simplest supported stack and responsibility boundaries that fit. Prefer platform-supported defaults unless a concrete requirement justifies divergence. Leave ordinary implementation details to the engineering owner. A plausible design is not proof of platform feasibility.
+## 3. State architectural intent without pretending the environment is known
 
-## Resolve the risks that could invalidate the offering
+Describe system context, responsibility boundaries, key integrations, significant interfaces and data flows. Recommend the simplest plausible stack and design consistent with requirements and existing code; prefer compatible, supported defaults unless there is a reason not to. Treat the stack as a **proposal** unless already decided. Include only architecture views/diagrams that reduce ambiguity. Leave ordinary implementation tactics and final tool/version selection to the local engineering owner.
 
-Research load-bearing claims against current primary sources when browsing is available. Record the exact platform/version/distribution context, source, known restriction and cheapest executable proof. Verify sources by opening them, not relying on snippets. Date unstable facts; label unavailable evidence.
+Research load-bearing platform/integration claims against current primary sources when possible, opening the relevant source rather than trusting a snippet. Record platform/version/distribution context, source/date, restrictions and the cheapest meaningful test. Distinguish external documentation, direct observation and inference. An unexecuted proof is **pending**, not passed. For each high-impact unknown specify the allowed environment, access, success/failure criterion, consequence and owner of the probe.
 
-For each important uncertainty, specify the observation needed, allowed environment, required access, success/failure criterion and decision affected. Assign a probe to the local owner when the planning host cannot run it. Mock success cannot qualify an external contract.
+## 4. Plan connected outcomes, not tasks masquerading as value
 
-Specify the minimum scaffold or vertical slice the local owner needs to obtain the proof. Do not plan substantial dependent commitments or declare a dependent capability ready while its load-bearing assumption remains unproved. A pending proof blocks the affected commitment or acceptance, not the bounded experiment needed to resolve it. Continue independent preparation; implementation remains for the local owner to execute only when authorized.
+Name the smallest end-to-end journey that delivers a real result to its intended user, including necessary authentication, persistence, asynchronous processing, provider integration and downstream access. An isolated page or mocked API does not establish a product-dependent journey. Order subsequent increments by dependency and user value; retain all required later scope. For each increment state working outcome, requirements covered, prerequisites, acceptance evidence and remaining native/provider/release qualification. Distinguish local completion from real-provider or release readiness. Do not commit to dependent features while feasibility assumptions that could invalidate them remain unproved.
 
-## Plan a connected path and its expansion
+**Important phase boundary:** the end-to-end product journey and any application scaffold needed for it belong to **implementation after approval**. Preflight may inspect an existing scaffold, run existing builds/tests, configure authorized infrastructure and execute narrow, safe *non-product* tooling probes. If proving a load-bearing assumption requires new product code or a substantial scaffold, record that proof as the first *post-approval* implementation task. Never redefine preflight so broadly that it silently becomes development.
 
-Define the smallest real user journey that crosses the critical boundaries, then order the remaining features around expanding it. End at user value, including the asynchronous processing, durable state and downstream access needed to deliver it—not merely the last screen or API call. Include necessary provider setup, deployment and observability early enough to exercise it. A page-only skeleton is insufficient for a product that depends on authentication, persistence, billing or another integration.
+## 5. Specify capabilities; delegate tooling ownership locally
 
-For each increment name the outcome, dependencies, acceptance evidence and unresolved obligations. Apply relevant safety controls as soon as the corresponding access, data or external effects exist, including during development experiments. Distinguish local engineering completion, native/provider qualification and release readiness; name substituted or unqualified boundaries. Keep all required features visible; a thin first path does not remove later requirements.
+Define the capabilities required to prepare and execute the first milestone, with `CAP-...` identifiers where useful. Each capability includes its purpose, criticality/timing, relevant access limits and an **objective verification check**. Typical categories, only when applicable: repository and instructions, runtimes/build/tests/CI, local application/browser interaction, logging and diagnostics, sandbox providers, private credential entry, safe resource isolation, and independent review.
 
-## Prepare the local handoff
+The initial agent **may suggest** tools, skills, MCP servers, CLIs, SDKs or services with relevant rationale. Suggestions are not an install list or a claim that a tool is available. **The local implementation agent owns** inspecting existing tooling; researching current supported alternatives; selecting the least-complex sufficient approach; installing/configuring host tools, skills, MCPs, instructions and permissible permissions; and verifying what actually loads and operates. CLI/API/native host features may be preferable to MCPs. Inspect skill provenance, trigger, duplication and instruction conflicts; prefer compatible changes with rollback over unnecessary upgrades. Identify required secrets by purpose and private entry method, never their values.
 
-Use [assets/baseline-template.md](assets/baseline-template.md) to assemble the result; combine or omit inapplicable sections. Usually produce one portable Markdown baseline plus a copyable startup prompt. Reuse repository documentation conventions if files are requested. Save only to an authorized destination; otherwise return the document in chat.
+## 6. Write an explicit two-phase authority contract
 
-Identify who does what:
+The **first local session is Phase 1 — Preflight & Preparation**, not an implementation kickoff. Give the local agent these instructions explicitly:
 
-- The owner sets product commitments, resource/permission limits and consequential acceptance.
-- One local engineering owner qualifies the environment and owns the authorized outcome across implementation, testing, review, integration, permitted development deployment and runtime qualification, including directly necessary corrections in existing components.
-- Fresh supporting agents answer bounded research/review questions; their use depends on host support and useful independent scope.
-- A separate planning agent assists with consequential decisions or unresolved assumptions without becoming a mandatory relay for every slice.
+1. Inspect the actual repository, worktree, current implementation, project rules and host/runtime constraints; reconcile the brief with current evidence, reporting material conflicts instead of silently overruling agreed requirements.
+2. Map the brief's capability requirements to existing and candidate tools. Research and select appropriate tools/skills/MCPs and document trade-offs, provenance/compatibility and rationale.
+3. **Within already granted authority**, configure or repair necessary development tooling, host instructions, skill connections, permissions and safe test/sandbox access. Reuse existing infrastructure; do not create duplicate resources unnecessarily.
+4. Run bounded environment validation and tooling smoke tests. Distinguish `PASS`, `FAIL`, `NOT TESTED` and `NOT APPLICABLE`, providing commands or reproducible observations, actual versions/configuration where visible, and unverified limits. Do not conflate an installed tool with a tested capability.
+5. Produce `PREFLIGHT_REPORT.md` (or the repository's equivalent) plus a concise chat summary; if file writes are not permitted, provide the full report in chat and flag persistence as pending. Include repository/ref and brief revision, setup changes, capability-by-capability evidence, missing inputs, exact user actions, blocked work, risks, and the proposed first implementation milestone. Report status as **READY — AWAITING APPROVAL** or **BLOCKED — USER ACTION REQUIRED**, qualifying mixed/untested capabilities.
+6. **STOP. Do not implement product features, create a substantial product scaffold, run product migrations, expand into delivery milestones or deploy application changes before explicit user approval given *after reviewing the preflight report*.** This applies even when all checks pass, when the user originally said “build it,” or when no blockers remain.
 
-Define the authorized outcome and completion boundary. Direct the local owner to continue after ordinary integration and return for agreed outcome acceptance, a genuine blocker, or a decision/effect outside existing authority—not merely an internal work-item boundary. Preserve actual milestone restrictions and required approvals in an existing project.
+Preflight may use authorized configuration changes, existing build/tests and ephemeral non-product connection probes; it must not create production effects, incur costs, weaken security, install dependencies of dubious provenance or request broader privileges without authorization. An existing authorization within its scope remains usable; the mandatory **post-report implementation approval** is a separate gate, not repeated authorization for every safe setup action. Providing a credential, answering a blocker question or approving a single setup operation **does not** itself approve Phase 2. If a blocker is resolved, revalidate and update the report, then still stop.
 
-Name development resources, permitted operations, spending/production limits and missing inputs. Reuse valid grants within their scope; neither the plan nor a startup prompt creates permission or credentials.
+After the user expressly approves Phase 2 against the reviewed brief/report and any limits, the local engineering owner may implement, test, review, integrate and verify the **approved outcome** without stopping at every task or PR. Preserve existing milestones and consequential owner decisions, ask before out-of-scope spending/external/destructive/production effects, and return for genuine blockers or outcome acceptance. Require meaningful behavior/boundary tests, runtime/browser/provider checks as relevant, proportionate independent review where truly available, integrated-build verification and project documentation updates. Do not call sequential self-review independent. Host permissions and runtime controls—not the prompt—govern actual operations.
 
-Name capabilities needed for the next path, then suggest actual tools only where available. A CLI/API may suffice without an MCP. Browser access must support inspecting the relevant app. Identify missing secrets by purpose and private entry method, never include their values.
+## 7. Produce the brief and the copyable prompt
 
-Recommend skills selectively: research for uncertainty; writing-for-agents for agent documents; TDD for behavior; diagnosing-bugs for reproduced defects; code-review for independent review; handoff for continuity. These are examples, not required dependencies. The local owner inspects each selected skill's trigger, provenance and instructions before use and checks duplicates/conflicts. During setup or relevant changes, verify effective configuration, loaded versions and runtime capabilities where observable; report limits instead of inventing verification. Recommend deliberate compatible updates with qualification and rollback, not automatic migration to the newest release.
+Use [assets/baseline-template.md](assets/baseline-template.md) for the build brief and [assets/local-startup-prompt-template.md](assets/local-startup-prompt-template.md) for the standalone prompt. Replace placeholders with observed facts or explicitly `PENDING` information. The brief must contain the project-specific preflight contract and point to the prompt; **also include the exact copyable prompt at the end of the brief when practical** so a single document can be handed over, but supply it separately as well. Keep the two copies consistent.
 
-Set expectations for meaningful behavior/boundary tests, runtime/browser checks, proportionate independent review and applicable final-candidate CI. For TDD changes, observe the expected failing behavior before implementation; research, prose and inspection need no artificial RED. After corrections, recheck affected behavior, integrate, and verify the integrated build in the allocated environment. Exercise affected native boundaries when needed—not every expensive scenario for unrelated edits. Preserve repository-required gates; avoid arbitrary test ratios, fixed model mandates and universal full-review resets.
+Default outputs:
 
-Supporting briefs specify scope, context/refs, ownership and output. Reviewers challenge the author's conclusions against acceptance and interacting implementation, distinguish inspection from personally executed checks, and report actual isolation. The engineering owner reconciles results. Do not describe sequential self-review as independent review when the host lacks separate contexts.
+- **`BUILD_BASELINE.md`** — the authoritative, portable build brief/specification: product, traceable acceptance, architecture intent, evidence/risks, connected roadmap, capability verification matrix, preflight scope, limits and approval gate.
+- **`LOCAL_AGENT_STARTUP_PROMPT.md`** — a short, self-contained startup prompt that locates the brief, grants *only* known preflight permissions, instructs environment preparation/verification, requires `PREFLIGHT_REPORT.md`, and ends at the mandatory stop.
 
-Keep product, decisions, plan, setup and current state discoverable in the repo. A short AGENTS entry point routes to them. Update affected docs with behavior changes; keep current refs, verified progress, unresolved obligations and resume steps compact. Prompts express intent; actual host/provider permissions and an actual runtime control execution and persistence.
+Use project naming conventions if appropriate; if not allowed to write files, return both clearly labeled in chat. Save only to authorized destinations. Do not create the preflight report or claim it was executed: that is the local agent's work.
 
-## Check completeness and report readiness
+## 8. Check first-session quality
 
-Before handoff, check that required journeys/features have acceptance conditions, load-bearing assumptions have evidence or assigned probes, the first path is connected, and authority/resource boundaries are explicit or marked pending. Resolve contradictions within existing authority; present genuine product conflicts for owner decision with a recommendation.
+Before handoff verify: every required journey/feature has measurable acceptance; material requirements link to milestones; architecture proposals are not mislabeled as decisions; important risks have evidence or assigned post-approval probes; capabilities have objective checks; the first connected journey finishes at user value; setup authority and pending permissions are distinct; the standalone prompt identifies the brief; and **both the brief and prompt make the Phase 1 report → mandatory stop → explicit post-report approval → Phase 2 sequence unambiguous**.
 
-Report whether the baseline is ready for local qualification, which product decisions are pending, and which dependent work requires proof/access. Do not claim verified environment, owner approval or launch readiness without evidence. Provide the startup prompt using only authority actually granted; use labeled permission choices when not yet granted.
-
-Keep the result proportional to the project. Use the template as a coverage guide, not a form requiring every heading. For a small product, aim for roughly 800–1,200 words plus the startup prompt; expand only for material complexity. State each rule once and reference it from acceptance/worklist rows rather than repeating it in prose. This skill prepares work; installing tools, creating resources, changing a repository or deploying remains governed by the user's actual request and permissions.
+Report baseline status as **READY FOR LOCAL PREFLIGHT** or **PRODUCT DECISION PENDING**, and specify important unresolved decisions and access. This status does **not** mean local readiness, user approval, provider qualification or launch readiness. Keep documentation proportional: combine or omit inapplicable explanatory subsections, never omit the two deliverables or the approval contract. For maintainers, use [references/handoff-behavior-checks.md](references/handoff-behavior-checks.md) for behavioral regression scenarios; these are not extra project gates.
